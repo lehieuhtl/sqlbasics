@@ -43,3 +43,34 @@ VALUES
     (1, 'gp smol home'),
     (1, 'arlington mansion'),
     (1, 'irving box');
+
+-- @block
+SELECT * FROM users
+INNER JOIN hiddenworlds
+ON hiddenworlds.owner_id = users.id;
+
+-- @block
+SELECT users.id AS users_id
+FROM users
+LEFT JOIN hiddenworlds
+ON hiddenworlds.owner_id = users.id;
+
+-- @block
+CREATE TABLE bookings(
+    id INT AUTO_INCREMENT,
+    guest_id INT NOT NULL,
+    hiddenworlds_id INT NOT NULL,
+    check_in DATETIME,
+    PRIMARY KEY (id),
+    FOREIGN KEY (guest_id) REFERENCES users(id),
+    FOREIGN KEY (hiddenworlds_id) REFERENCES hiddenworlds(id)
+);
+
+-- @block
+SELECT
+    guest_id,
+    street,
+    check_in
+FROM bookings
+INNER JOIN hiddenworlds ON hiddenworlds_id = guest_id
+WHERE guest_id = 1;
