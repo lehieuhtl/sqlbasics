@@ -25,3 +25,5 @@ OR email LIKE 'f%'
 
 ORDER BY ID ASC
 LIMIT 2;
+-- @block
+CREATE INDEX email_index ON Users(email);
